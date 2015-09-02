@@ -14,6 +14,12 @@ BOT_NAME = 'PCcrawler'
 SPIDER_MODULES = ['PCcrawler.spiders']
 NEWSPIDER_MODULE = 'PCcrawler.spiders'
 
+# forbidden cookies
+COOKIES_ENABLED = False
+
+ITEM_PIPELINES = {	
+	'PCcrawler.pipelines.PccrawlerPipeline':300
+}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'PCcrawler (+http://www.yourdomain.com)'
