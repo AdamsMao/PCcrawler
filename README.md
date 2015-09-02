@@ -1,2 +1,2 @@
-A PC crawler powered by python and scrapy.
+A simple crawler powered by python and scrapy.
 
