@@ -1,2 +1,2 @@
-A simple crawler inspired by python and scrapy.
+A simple crawler inspired by scrapy.
 
