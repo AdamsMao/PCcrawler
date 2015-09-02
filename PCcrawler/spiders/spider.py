@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-  
 
+import re
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 from scrapy.selector import Selector
@@ -24,18 +25,25 @@ class PCcrawlerSpider(CrawlSpider):
 
                 item = PccrawlerItem()
                 sel = Selector(response)
-                article_name = sel.xpath('//a/text()').extract()
-                article_url = str(response.url)
+		all_hypers = sel.xpath('//a').extract()
+		for i in all_hypers:
+			obj = re.search(r'阅兵',i.encode('utf-8'),re.M|re.I)	
+			if obj:
+                		article_name = i 
+                		article_url = 'I am a URL'
 
-                item['article_name'] = [n.encode('utf-8') for n in article_name]
-                item['article_url'] = article_url.encode('utf-8')
+                		item['article_name'] = article_name.encode('utf-8') 
+                		item['article_url'] = article_url.encode('utf-8')
 
-                yield item
+                		yield item
 
 	def link_filtering(self, links):
 		ret = []
 		for link in links:
-			print 
+			#print '\n'
+			print 'link text:',link.text
+			print 'link url:',link.url
+			#print '\n' 
 			ret.append(link)
-			
+			#s = raw_input('wait...')		
 		return ret
